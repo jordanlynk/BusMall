@@ -2,9 +2,9 @@
 'use strict';
 
 var allProducts = [];
-var imageOneElement = document.getElementById('image1');
-var imageTwoElement = document.getElementById('image2');
-var imageThreeElement = document.getElementById('image3');
+var imageOneElement = document.getElementById('image-one');
+var imageTwoElement = document.getElementById('image-two');
+var imageThreeElement = document.getElementById('image-three');
 var imageContainer = document.getElementById('image-container');
 var recentRandomNumbers = [];
 var totalOfRounds = 25;
@@ -44,6 +44,7 @@ new ProductImages('img/wine-glass.jpg', 'wine-glass');
 
 // this will be the random number generator function
 function getRandomNumber(min, max) {
+
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
