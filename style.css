@@ -1,0 +1,46 @@
+body {
+  background-color: rgb(245, 193, 126);
+  color: white;
+  font-family: 'Crimson Text', serif;
+  font-size: 20px;
+}
+p {
+  margin: 30px;
+}
+
+ul{
+  margin: 20px;
+}
+#image-container{
+  max-width:100%;
+  max-height:100%;
+}
+h2{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+button{
+  background: white;
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+section.footer {
+  background-color: grey;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 40px;
+}
