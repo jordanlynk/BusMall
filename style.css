@@ -1,8 +1,17 @@
 body {
   background-color: rgb(245, 193, 126);
-  color: white;
+  color: black;
   font-family: 'Crimson Text', serif;
-  font-size: 20px;
+  font-size: 22px;
+  margin-bottom: auto;
+}
+h2{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 p {
   margin: 25px;
@@ -15,12 +24,9 @@ ul{
   max-width:100%;
   max-height:100%;
 }
-h2{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  color: white;
-  margin-top: 20px;
-  margin-bottom: 40px;
+img{
+  width: 20%;
+  margin-left: 90px;
 }
 button{
   background: white;
