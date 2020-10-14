@@ -2,10 +2,12 @@
 <html>
 
   <head>
+    <meta description="BusMall Product Research">
+    <meta charset="utf-8">
     <title>BusMall Potential Products</title>
-    <link href="reset.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,600&display=swap" rel="stylesheet">
-    <link href="style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
@@ -17,17 +19,20 @@
       <p>We appreciate your time and participation in helping us at BusMall!</p>
     </section>
     <section id = "image-container">
-       <img id ="image-one" src="" alt="">
-        <img id ="image-two" src="" alt="">
-       <img id ="image-three" src="" alt="">
-    </section>
-    <section id="resultslistsection"> 
-      <ul id="resultslist"></ul>
+       <ul>
+        <li><img id ="image-one" src="" alt=""></li>
+        <li><img id ="image-two" src="" alt=""></li>
+        <li><img id ="image-three" src="" alt=""></li>
+       </ul>
     </section>
     <section>
-      <canvas id="myChart" width="90" height="90"></canvas>
-      <canvas id="mySecondChart" width="90" height="90"></canvas>
-      </section>
+      <div id="button">
+      <button id="disp-results" title="button">Display Your Results</button>
+    </div>
+    </section>
+    <section id="chart">
+      <canvas id="myChart"></canvas>
+    </section>
     </main>
     <footer><section class="footer">
       <p><i>All content is property of BusMall, LLC.</i></p>
