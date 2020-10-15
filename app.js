@@ -11,36 +11,15 @@ var productNamesArray = [];
 var viewsArray = [];
 
 // this will be my constructor function that will create product object instances
-function Product(filepath, productName) {
+function Product(filepath, productName, votes = 0, numberOfViews = 0) {
   this.filepath = filepath;
   this.name = productName;
-  this.votes = 0;
-  this.numberOfViews = 0;
+  this.votes = votes;
+  this.numberOfViews = numberOfViews;
 
   allProducts.push(this);
   productNamesArray.push(this.name);
 }
-// create object instances for each product
-new Product('img/bag.jpg', 'bag');
-new Product('img/banana.jpg', 'banana');
-new Product('img/bathroom.jpg', 'bathroom');
-new Product('img/boots.jpg', 'boots');
-new Product('img/breakfast.jpg', 'breakfast');
-new Product('img/bubblegum.jpg', 'bubblegum');
-new Product('img/chair.jpg', 'chair');
-new Product('img/cthulhu.jpg', 'cthulhu');
-new Product('img/dog-duck.jpg', 'dog-duck');
-new Product('img/dragon.jpg', 'dragon');
-new Product('img/pen.jpg', 'pen');
-new Product('img/pet-sweep.jpg', 'pet-sweep');
-new Product('img/scissors.jpg', 'scissors');
-new Product('img/shark.jpg', 'shark');
-new Product('img/sweep.jpg', 'sweep');
-new Product('img/tauntaun.jpg', 'tauntaun');
-new Product('img/unicorn.jpg', 'unicorn');
-new Product('img/usb.gif', 'usb');
-new Product('img/water-can.jpg', 'water-can');
-new Product('img/wine-glass.jpg', 'wine-glass');
 
 // Random Number Generator
 function getRandomNumber(min, max) {
@@ -65,7 +44,7 @@ function renderProducts(imageElement) {
   console.log('singleProduct', allProducts[randomIndex]);
   imageElement.title = allProducts[randomIndex].name;
   allProducts[randomIndex].numberOfViews++;
-  allProducts.push(allProducts[randomIndex]);
+  // allProducts.push(allProducts[randomIndex]); did not need this, as it was pushing mulitples.
 
   recentRandomNumbers.push(randomIndex);
 
@@ -74,6 +53,9 @@ function renderProducts(imageElement) {
 imageContainer.addEventListener('click', handleClick);
 function handleClick(event) {
   event.preventDefault();
+  var itemsMadeJson = JSON.stringify(allProducts);
+  localStorage.setItem('itemsFromLocalStorage', itemsMadeJson);
+  
   if (roundsTaken !== 25){
     var chosenProduct = event.target.title;
   for (var i = 0; i < allProducts.length; i++) {
@@ -90,6 +72,41 @@ function handleClick(event) {
     limitNumberOfTurns();
   }
 }
+if (!localStorage.getItem('itemsFromLocalStorage')){
+  new Product('img/bag.jpg', 'bag');
+  new Product('img/banana.jpg', 'banana');
+  new Product('img/bathroom.jpg', 'bathroom');
+  new Product('img/boots.jpg', 'boots');
+  new Product('img/breakfast.jpg', 'breakfast');
+  new Product('img/bubblegum.jpg', 'bubblegum');
+  new Product('img/chair.jpg', 'chair');
+  new Product('img/cthulhu.jpg', 'cthulhu');
+  new Product('img/dog-duck.jpg', 'dog-duck');
+  new Product('img/dragon.jpg', 'dragon');
+  new Product('img/pen.jpg', 'pen');
+  new Product('img/pet-sweep.jpg', 'pet-sweep');
+  new Product('img/scissors.jpg', 'scissors');
+  new Product('img/shark.jpg', 'shark');
+  new Product('img/sweep.jpg', 'sweep');
+  new Product('img/tauntaun.jpg', 'tauntaun');
+  new Product('img/unicorn.jpg', 'unicorn');
+  new Product('img/usb.gif', 'usb');
+  new Product('img/water-can.jpg', 'water-can');
+  new Product('img/wine-glass.jpg', 'wine-glass');
+} else {
+  var itemsFromLocalAsString = localStorage.getItem('itemsFromLocalStorage');
+  var itemsFromLocalAsArray = JSON.parse(itemsFromLocalAsString);
+
+  for (var i = 0; i < itemsFromLocalAsArray.length; i++) {
+    var reNameFilePath = itemsFromLocalAsArray[i].filepath;
+    var reNameProduct = itemsFromLocalAsArray[i].productName;    
+    var reNameVotes = itemsFromLocalAsArray[i].votes;
+    var reNameViews = itemsFromLocalAsArray[i].numberOfViews;
+    new Product(reNameFilePath, reNameProduct, reNameVotes, reNameViews);
+  }
+}
+
+
 //removes the event listener after the 25th vote
 function limitNumberOfTurns() {
   if (roundsTaken === numberOfRounds) {
