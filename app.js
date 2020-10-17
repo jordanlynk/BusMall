@@ -1,3 +1,4 @@
+// these are going to be my global variables that will be utilized throughout the JS code
 var allProducts = [];
 var imageOneElement = document.getElementById('image-one');
 var imageTwoElement = document.getElementById('image-two');
@@ -44,12 +45,11 @@ function renderProducts(imageElement) {
   console.log('singleProduct', allProducts[randomIndex]);
   imageElement.title = allProducts[randomIndex].name;
   allProducts[randomIndex].numberOfViews++;
-  // allProducts.push(allProducts[randomIndex]); did not need this, as it was pushing mulitples.
 
   recentRandomNumbers.push(randomIndex);
 
 }
-
+// this will be where my event listener, listens for the click and from there once heard stores the all products array
 imageContainer.addEventListener('click', handleClick);
 function handleClick(event) {
   event.preventDefault();
@@ -63,6 +63,7 @@ function handleClick(event) {
       allProducts[i].votes++;
     }
   }
+  // renders all the product images, while mainting the thought that no 3 will be repeated or duplicated
   renderProducts(imageOneElement);
   renderProducts(imageTwoElement);
   renderProducts(imageThreeElement);
@@ -72,6 +73,7 @@ function handleClick(event) {
     limitNumberOfTurns();
   }
 }
+// if the local storage is not this, I will create all of these object instances:
 if (!localStorage.getItem('itemsFromLocalStorage')){
   new Product('img/bag.jpg', 'bag');
   new Product('img/banana.jpg', 'banana');
@@ -94,12 +96,13 @@ if (!localStorage.getItem('itemsFromLocalStorage')){
   new Product('img/water-can.jpg', 'water-can');
   new Product('img/wine-glass.jpg', 'wine-glass');
 } else {
+  // or else I'm going to get items from my local storgage and then store them into my string
   var itemsFromLocalAsString = localStorage.getItem('itemsFromLocalStorage');
   var itemsFromLocalAsArray = JSON.parse(itemsFromLocalAsString);
-
+// this for loop will provide the ability to take things out of storage and then refactor them back into their original variables
   for (var i = 0; i < itemsFromLocalAsArray.length; i++) {
     var reNameFilePath = itemsFromLocalAsArray[i].filepath;
-    var reNameProduct = itemsFromLocalAsArray[i].productName;    
+    var reNameProduct = itemsFromLocalAsArray[i].name;    
     var reNameVotes = itemsFromLocalAsArray[i].votes;
     var reNameViews = itemsFromLocalAsArray[i].numberOfViews;
     new Product(reNameFilePath, reNameProduct, reNameVotes, reNameViews);
@@ -107,7 +110,7 @@ if (!localStorage.getItem('itemsFromLocalStorage')){
 }
 
 
-//removes the event listener after the 25th vote
+//this will remove the event listener after the 25th vote and then prompt the user to display their results
 function limitNumberOfTurns() {
   if (roundsTaken === numberOfRounds) {
     imageContainer.removeEventListener('click', handleClick);
@@ -115,7 +118,7 @@ function limitNumberOfTurns() {
     makeVotesArrayForChart();
   }
 }
-
+// this will create the votes for the chart that will be displayed after the 25th round. 
 function makeVotesArrayForChart() {
   for (var i = 0; i < allProducts.length; i++) {
     votesArray.push(allProducts[i].votes);
@@ -135,7 +138,7 @@ renderProducts(imageOneElement);
 renderProducts(imageTwoElement);
 renderProducts(imageThreeElement);
 
-
+// this chart acts will act as a display for the total amount of times something is voted on and how the product name itself that will be taken from the above code.
 function makeVotesChart() {
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
@@ -145,6 +148,7 @@ function makeVotesChart() {
       datasets: [{
         label: 'Product Total Votes',
         data: votesArray,
+        // all of these colors will set so that the graph can be easily defined and read
         backgroundColor: [
          'rgba(1, 249, 195, 1)',
          'rgba(249, 1, 1, 1)',
